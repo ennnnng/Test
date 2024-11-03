@@ -1,0 +1,122 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 30px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 700px;
+    padding: 10px 20px;
+    position: relative;
+    color: #ffffff;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0;
+}
+
+.logo {
+    width: 60px;
+    height: auto;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: left;
+    margin-top: 20px;
+}
+
+h2, h3 {
+    color: #333;
+    text-align: center;
+}
+
+.form-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    width: 140px;
+    margin-right: 10px;
+}
+
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+}
+
+.button-group {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button.primary-button, button.secondary-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+button.primary-button {
+    background-color: #4CAF50;
+}
+
+button.secondary-button {
+    background-color: #2196F3;
+}
+
+.question {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.question label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.question .category-select {
+    margin-left: auto;
+}
+
+.question input[type="text"], 
+.question select, 
+.question .multiple-choice {
+    width: 100%;
+    margin-top: 5px;
+    padding: 8px;
+}
+
+.multiple-choice {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}

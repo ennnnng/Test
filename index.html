@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taif University, Electrical Engineering Department</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <img src="images/TU.png" class="logo left-logo">
+        <h1 class="header-title">Taif University, Electrical Engineering Department</h1>
+        <img src="images/EE.png" class="logo right-logo">
+    </div>
+
+    <div class="container">
+        <h2>Indirect Assessment Tools for CLOs</h2>
+        <div class="form-section">
+            <label for="formTitle">Course Title:</label>
+            <input type="text" id="formTitle" name="formTitle" required>
+        </div>
+        <div class="form-section">
+            <label for="formDescription">Course Description:</label>
+            <input type="text" id="formDescription" name="formDescription" required>
+        </div>
+
+        <h3>Questions</h3>
+        <div id="questionsContainer"></div>
+
+        <div class="button-group">
+            <button type="button" class="secondary-button" onclick="addQuestion()">Add Question</button>
+            <button type="button" class="primary-button" onclick="generateGoogleForm()">Generate Google Form</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
