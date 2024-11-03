@@ -63,10 +63,11 @@ function generateGoogleForm() {
         questionType: JSON.stringify(questionType)
     }).toString();
 
+    // Use the CORS proxy to bypass CORS issues
     const scriptUrl = `https://script.google.com/macros/s/AKfycbxarB8ZMSUKO0754qssUcMe_pOIP6U2xInHrgoupHmis9ojTWlFSw5dqboAfJWcrwSG/exec?${queryParams}`;
+    const corsProxy = "https://cors-anywhere.herokuapp.com/";  // Add the CORS proxy prefix
 
-    // Send a GET request to the Google Apps Script
-    fetch(scriptUrl)
+    fetch(corsProxy + scriptUrl)
         .then(response => response.json())
         .then(result => {
             if (result.success) {
