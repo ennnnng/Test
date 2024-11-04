@@ -63,11 +63,19 @@ function generateGoogleForm() {
     const scriptUrl = 'https://script.google.com/macros/s/AKfycbxarB8ZMSUKO0754qssUcMe_pOIP6U2xInHrgoupHmis9ojTWlFSw5dqboAfJWcrwSG/exec';
 
     fetch(scriptUrl, {
-        method: 'POST',
+        method: 'OPTIONS',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        }
+    }).then(() => {
+        // Proceed with the actual POST request after the OPTIONS request passes
+        return fetch(scriptUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
     })
     .then(response => response.json())
     .then(result => {
@@ -80,3 +88,5 @@ function generateGoogleForm() {
     })
     .catch(error => console.error("Error:", error));
 }
+
+
