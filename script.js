@@ -55,7 +55,7 @@ function generateGoogleForm() {
         questionType.push(questionElement.querySelector('select[name="questionType[]"]').value);
     });
 
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxarB8ZMSUKO0754qssUcMe_pOIP6U2xInHrgoupHmis9ojTWlFSw5dqboAfJWcrwSG/exec';
+    const scriptUrl = 'https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbxarB8ZMSUKO0754qssUcMe_pOIP6U2xInHrgoupHmis9ojTWlFSw5dqboAfJWcrwSG/exec';
     const url = `${scriptUrl}?formTitle=${encodeURIComponent(formTitle)}&formDescription=${encodeURIComponent(formDescription)}&questionText=${encodeURIComponent(JSON.stringify(questionText))}&questionType=${encodeURIComponent(JSON.stringify(questionType))}`;
 
     fetch(url)
