@@ -43,25 +43,38 @@ function toggleScaleOptions(selectElement) {
 }
 
 function generateGoogleForm() {
-    const formTitle = document.getElementById('formTitle').value || "Untitled Form";
-    const formDescription = document.getElementById('formDescription').value || "No Description";
-    const questionText = [];
-    const questionType = [];
+    const data = {
+        formTitle: document.getElementById('formTitle').value || "Untitled Form",
+        formDescription: document.getElementById('formDescription').value || "No Description",
+        questionText: [],
+        questionType: []
+    };
 
     const questionElements = document.querySelectorAll('#questionsContainer .question');
     questionElements.forEach(questionElement => {
-        questionText.push(questionElement.querySelector('input[name="questionText[]"]').value);
-        questionType.push(questionElement.querySelector('select[name="questionType[]"]').value);
+        const questionText = questionElement.querySelector('input[name="questionText[]"]').value;
+        const questionType = questionElement.querySelector('select[name="questionType[]"]').value;
+        
+        data.questionText.push(questionText);
+        data.questionType.push(questionType);
     });
 
     const scriptUrl = 'https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbxarB8ZMSUKO0754qssUcMe_pOIP6U2xInHrgoupHmis9ojTWlFSw5dqboAfJWcrwSG/exec';
-    
+
     fetch(scriptUrl, {
-        method: 'POST',
+        method: 'OPTIONS',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        }
+    }).then(() => {
+        // Proceed with the actual POST request after the OPTIONS request passes
+        return fetch(scriptUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
     })
     .then(response => response.json())
     .then(result => {
