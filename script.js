@@ -44,49 +44,31 @@ function toggleScaleOptions(selectElement) {
 
 
 function generateGoogleForm() {
-    const data = {
-        formTitle: document.getElementById('formTitle').value || "Untitled Form",
-        formDescription: document.getElementById('formDescription').value || "No Description",
-        questionText: [],
-        questionType: []
-    };
+    const formTitle = document.getElementById('formTitle').value || "Untitled Form";
+    const formDescription = document.getElementById('formDescription').value || "No Description";
+    const questionText = [];
+    const questionType = [];
 
     const questionElements = document.querySelectorAll('#questionsContainer .question');
     questionElements.forEach(questionElement => {
-        const questionText = questionElement.querySelector('input[name="questionText[]"]').value;
-        const questionType = questionElement.querySelector('select[name="questionType[]"]').value;
-        
-        data.questionText.push(questionText);
-        data.questionType.push(questionType);
+        questionText.push(questionElement.querySelector('input[name="questionText[]"]').value);
+        questionType.push(questionElement.querySelector('select[name="questionType[]"]').value);
     });
 
     const scriptUrl = 'https://script.google.com/macros/s/AKfycbxarB8ZMSUKO0754qssUcMe_pOIP6U2xInHrgoupHmis9ojTWlFSw5dqboAfJWcrwSG/exec';
+    const url = `${scriptUrl}?formTitle=${encodeURIComponent(formTitle)}&formDescription=${encodeURIComponent(formDescription)}&questionText=${encodeURIComponent(JSON.stringify(questionText))}&questionType=${encodeURIComponent(JSON.stringify(questionType))}`;
 
-    fetch(scriptUrl, {
-        method: 'OPTIONS',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(() => {
-        // Proceed with the actual POST request after the OPTIONS request passes
-        return fetch(scriptUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            alert("Google Form generated: " + result.formUrl);
-            window.open(result.formUrl, "_blank");
-        } else {
-            alert("Error generating form");
-        }
-    })
-    .catch(error => console.error("Error:", error));
+    fetch(url)
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert("Google Form generated: " + result.formUrl);
+                window.open(result.formUrl, "_blank");
+            } else {
+                alert("Error generating form");
+            }
+        })
+        .catch(error => console.error("Error:", error));
 }
 
 
