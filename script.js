@@ -1,3 +1,48 @@
+function addQuestion() {
+    const container = document.getElementById('questionsContainer');
+    const questionDiv = document.createElement('div');
+    questionDiv.classList.add('question');
+
+    questionDiv.innerHTML = `
+        <label class="category-select">Category:</label>
+        <select name="category[]" class="category-select">
+            <option value="K1">K1</option>
+            <option value="S1">S1</option>
+            <option value="S2">S2</option>
+            <option value="S3">S3</option>
+            <option value="S4">S4</option>
+            <option value="V1">V1</option>
+            <option value="V2">V2</option>
+            <option value="Feedback">Feedback about the course</option>
+        </select>
+
+        <label>Question Text:</label>
+        <input type="text" name="questionText[]" required>
+
+        <label>Question Type:</label>
+        <select name="questionType[]" onchange="toggleScaleOptions(this)">
+            <option value="TEXT">Short Answer</option>
+            <option value="PARAGRAPH">Paragraph</option>
+            <option value="SCALE">Scale</option>
+        </select>
+
+        <div class="multiple-choice" style="display: none;">
+            <label><input type="radio" name="scale[]" value="Strongly Disagree"> Strongly Disagree</label>
+            <label><input type="radio" name="scale[]" value="Disagree"> Disagree</label>
+            <label><input type="radio" name="scale[]" value="Neutral"> Neutral</label>
+            <label><input type="radio" name="scale[]" value="Agree"> Agree</label>
+            <label><input type="radio" name="scale[]" value="Strongly Agree"> Strongly Agree</label>
+        </div>
+    `;
+    container.appendChild(questionDiv);
+}
+
+function toggleScaleOptions(selectElement) {
+    const multipleChoiceDiv = selectElement.closest('.question').querySelector('.multiple-choice');
+    multipleChoiceDiv.style.display = (selectElement.value === 'SCALE') ? 'block' : 'none';
+}
+
+
 function generateGoogleForm() {
     // Initialize data object
     const data = {
