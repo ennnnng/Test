@@ -58,17 +58,22 @@ function generateGoogleForm() {
     const scriptUrl = 'https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbxarB8ZMSUKO0754qssUcMe_pOIP6U2xInHrgoupHmis9ojTWlFSw5dqboAfJWcrwSG/exec';
     const url = `${scriptUrl}?formTitle=${encodeURIComponent(formTitle)}&formDescription=${encodeURIComponent(formDescription)}&questionText=${encodeURIComponent(JSON.stringify(questionText))}&questionType=${encodeURIComponent(JSON.stringify(questionType))}`;
 
-    fetch(url)
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                alert("Google Form generated: " + result.formUrl);
-                window.open(result.formUrl, "_blank");
-            } else {
-                alert("Error generating form");
-            }
-        })
-        .catch(error => console.error("Error:", error));
+    fetch(scriptUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            alert("Google Form generated: " + result.formUrl);
+            window.open(result.formUrl, "_blank");
+        } else {
+            alert("Error generating form");
+        }
+    })
+    .catch(error => console.error("Error:", error));
 }
-
 
